@@ -1,0 +1,17 @@
+{
+  "name": "mern-ecomm",
+  "version": "1.0.0",
+  "description": "mern shopping cart app",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react-bootstrap": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server"
+  },
+  "author": "Rob de Boer",
+  "license": "ISC"
+}
