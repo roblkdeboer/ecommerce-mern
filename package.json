@@ -4,6 +4,7 @@
   "description": "mern shopping cart app",
   "main": "server.js",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "react-bootstrap": "^1.6.1"
   },
