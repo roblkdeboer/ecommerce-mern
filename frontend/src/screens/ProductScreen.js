@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import products from '../products';
+import axios from 'axios';
 
 // Match comes from Router
 const ProductScreen = ({ match }) => {
-  // For each product where product._id matches the ID from the route
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({});
+
+  //   Run when the component loads
+  //   Have to define a function to use async arrow functions
+  //   Destructure data object in the response
+  useEffect(() => {
+    const fetchProduct = async () => {
+      // Take the match prop and select the id
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+    // Pass in an array of dependencies to trigger useEffect when it changes
+  }, [match.params.id]);
 
   return (
     <>
