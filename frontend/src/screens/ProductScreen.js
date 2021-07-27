@@ -21,7 +21,7 @@ const ProductScreen = ({ match }) => {
 
     fetchProduct();
     // Pass in an array of dependencies to trigger useEffect when it changes
-  }, [match.params.id]);
+  }, [match]);
 
   return (
     <>
