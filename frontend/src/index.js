@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// Implement the reducers in the application
 import { Provider } from 'react-redux';
 import store from './store';
 import './bootstrap.min.css';

@@ -4,7 +4,7 @@ import {
   PRODUCT_LIST_REQUEST,
 } from '../constants/productConstants';
 
-// Reducers take in an initial state an action
+// Reducers take in an initial state and an action
 // Handle certain cases for the product list (request list, return list, can't retrieve list)
 export const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
