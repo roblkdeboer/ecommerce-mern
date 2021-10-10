@@ -9,3 +9,14 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+select.form-control {
+  margin: 0.75rem;
+  padding: 0.5rem;
+}
+
+@media only screen and (min-width: 980px) {
+  .product-purchase {
+    padding-top: 0.5rem;
+  }
+}
