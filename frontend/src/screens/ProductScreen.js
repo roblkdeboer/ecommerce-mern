@@ -101,7 +101,7 @@ const ProductScreen = ({ history, match }) => {
                       <Row>
                         <Col>Qty</Col>
                         <Col>
-                          {/* Select box, value is the quantity from component state.  On change, functio is triggered with the quantity in the box */}
+                          {/* Select box, value is the quantity from component state.  On change, function is triggered with the quantity in the box */}
                           <Form.Control
                             className="form-select"
                             as="select"
