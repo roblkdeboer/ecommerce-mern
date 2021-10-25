@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -11,12 +12,18 @@ connectDB();
 
 const app = express();
 
+// Allow us to accept JSON data in the request body
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('API is running');
 });
 
 // For anything directed to products, send it to the product router
 app.use('/api/products', productRoutes);
+
+// For anything directed to users, send it to the users router
+app.use('/api/users', userRoutes);
 
 // If someone tries to access an endpoint that is not defined
 app.use(notFound);
