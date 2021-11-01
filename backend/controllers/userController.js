@@ -27,4 +27,12 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+// @desc Get user profile
+// @route GET /api/users/profile
+// @access Private
+// Use async function as mongoose returns a promise
+const getUserProfile = asyncHandler(async (req, res) => {
+  res.send('Success');
+});
+
+export { authUser, getUserProfile };
