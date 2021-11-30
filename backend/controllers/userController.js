@@ -30,7 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @desc Create a new user
 // @route POST /api/users
 // @access Public
-// Use async function as mongoose returns a promise
+// Use w function as mongoose returns a promise
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
