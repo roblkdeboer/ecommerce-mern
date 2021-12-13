@@ -39,5 +39,4 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
-  y;
 };
