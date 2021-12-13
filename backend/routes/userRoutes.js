@@ -4,6 +4,7 @@ import {
   authUser,
   registerUser,
   getUserProfile,
+  updateUserProfile,
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -13,6 +14,10 @@ router.post('/login', authUser);
 router.route('/').post(registerUser);
 
 // Post request to return a logged in user
-router.route('/profile').get(protect, getUserProfile);
+// Update a user's info if they already exist
+router
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 export default router;

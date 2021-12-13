@@ -82,4 +82,35 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser };
+// @desc Update user profile
+// @route PUT /api/users/profile
+// @access Private
+// Use async function as mongoose returns a promise
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    // If a field is sent in the body, change to that, if not, keep the same
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    // New password will be hashed and salted because of the save middleware in userModel
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
+export { authUser, getUserProfile, registerUser, updateUserProfile };
