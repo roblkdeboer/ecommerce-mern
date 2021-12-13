@@ -30,3 +30,7 @@ select.form-control {
     padding-top: 0.5rem;
   }
 }
+
+.login-button {
+  margin-top: 0.7rem;
+}
