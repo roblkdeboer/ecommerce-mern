@@ -11,6 +11,7 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsrReducer,
+  userUpdateProfileReducer,
 } from './reducers/userReducers';
 
 const reducer = combineReducers({
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsrReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 // If found in local storage, parse the JSON, if not, return an empty array
