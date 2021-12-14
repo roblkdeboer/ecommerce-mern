@@ -34,9 +34,14 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null;
 
-// If shipping  address found in local storage, parse the JSON to return it, if not, return empty
+// If shipping address found in local storage, parse the JSON to return it, if not, return empty
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : {};
+
+// If payment method found in local storage, parse the JSON to return it, if not, return empty
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
+  ? JSON.parse(localStorage.getItem('paymentMethod'))
   : {};
 
 // Initialise the state with the local storage cart items,  s hipping address and user info
@@ -44,6 +49,7 @@ const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
 };
