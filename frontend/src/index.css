@@ -39,3 +39,8 @@ Button {
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
 }
+
+.nav-item {
+  margin-right: 0.7rem;
+  margin-left: 0.7rem;
+}
