@@ -44,3 +44,7 @@ Button {
   margin-right: 0.7rem;
   margin-left: 0.7rem;
 }
+
+.form-check {
+  margin-left: 0.5rem;
+}
