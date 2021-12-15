@@ -68,7 +68,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     };
 
     // Data to be updated with is the specific order object
-    const { data } = await axios.get(`/api/orders/${id}`, order, config);
+    const { data } = await axios.get(`/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
