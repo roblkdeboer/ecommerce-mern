@@ -4,6 +4,7 @@ import colors from 'colors';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -24,6 +25,8 @@ app.use('/api/products', productRoutes);
 
 // For anything directed to users, send it to the users router
 app.use('/api/users', userRoutes);
+
+app.use('/api/orders', orderRoutes);
 
 // If someone tries to access an endpoint that is not defined
 app.use(notFound);
