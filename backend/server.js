@@ -26,6 +26,7 @@ app.use('/api/products', productRoutes);
 // For anything directed to users, send it to the users router
 app.use('/api/users', userRoutes);
 
+// For anything related to orders, send it to this router
 app.use('/api/orders', orderRoutes);
 
 // If someone tries to access an endpoint that is not defined
