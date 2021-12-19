@@ -29,6 +29,10 @@ app.use('/api/users', userRoutes);
 // For anything related to orders, send it to this router
 app.use('/api/orders', orderRoutes);
 
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 // If someone tries to access an endpoint that is not defined
 app.use(notFound);
 // Writing custom middleware to intercept and generate error responses
