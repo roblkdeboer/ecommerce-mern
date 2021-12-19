@@ -63,7 +63,6 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @access Private
 // Use async function as mongoose returns a promise
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  // Attach the name and email for the order from the user table
   const order = await Order.findById(req.params.id);
 
   if (order) {
@@ -85,4 +84,14 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// @desc Get logged in user orders
+// @route GET /api/orders/myorders
+// @access Private
+// Use async function as mongoose returns a promise
+const getMyOrders = asyncHandler(async (req, res) => {
+  // Find orders for a specific user
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
