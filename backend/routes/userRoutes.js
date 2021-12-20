@@ -5,13 +5,15 @@ import {
   registerUser,
   getUserProfile,
   updateUserProfile,
+  getUsers,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, isAdmin } from '../middleware/authMiddleware.js';
 
 // Post request to login and call authUser
 router.post('/login', authUser);
 // Post request to create a new user
-router.route('/').post(registerUser);
+// Get request for all users
+router.route('/').post(registerUser).get(protect, isAdmin, getUsers);
 
 // Post request to return a logged in user
 // Update a user's info if they already exist
