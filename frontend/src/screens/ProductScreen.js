@@ -39,7 +39,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-        Go Back;
+        Go Back
       </Link>
       {/* If loading is true, show loading, if error, show error, else show the product details */}
       {loading ? (
