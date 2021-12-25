@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 
-const Header = () => {
+const Header = ({ history }) => {
   const dispatch = useDispatch();
 
   // Select the userLogin part of the state and destructure the user info.  Will return info if logged in
