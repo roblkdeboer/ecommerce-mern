@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
@@ -17,6 +18,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [countInStock, setCountInStock] = useState(0);
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -48,6 +50,31 @@ const ProductEditScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, productId, product, successUpdate, history]);
+
+  const uploadFileHandler = async (e) => {
+    //   Access to the first item in the array
+    const file = e.target.files[0];
+    const formData = new FormData();
+
+    formData.append('image', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', formData, config);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -90,6 +117,7 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setName(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
             <Form.Group controlId="price">
               <Form.Label>Price</Form.Label>
               <Form.Control
@@ -100,16 +128,23 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setPrice(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
             <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="price"
-                placeholder="Enter Image URL"
+                type="text"
+                placeholder="Enter image url"
                 value={image}
-                // Whatever we type in updates the email state
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
+              <Form.File
+                id="image-file"
+                custom
+                onChange={uploadFileHandler}
+              ></Form.File>
+              {uploading && <Loader />}
             </Form.Group>
+
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
@@ -120,6 +155,7 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
             <Form.Group controlId="countInStock">
               <Form.Label>Count In Stock</Form.Label>
               <Form.Control
@@ -130,6 +166,7 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setCountInStock(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
             <Form.Group controlId="category">
               <Form.Label> Category</Form.Label>
               <Form.Control
@@ -140,6 +177,7 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
             <Form.Group controlId="description">
               <Form.Label> Description</Form.Label>
               <Form.Control
