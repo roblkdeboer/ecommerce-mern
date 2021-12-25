@@ -5,9 +5,12 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
+  ORDER_LIST_FAIL,
   ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
   ORDER_PAY_FAIL,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
@@ -166,6 +169,45 @@ export const listMyOrders =
     } catch (error) {
       dispatch({
         type: ORDER_LIST_MY_FAIL,
+        //   Return error response and if there's a specific error message, return it, if not, return the error message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// use getState to get userinfo to get the token to authorise request
+export const listOrders =
+  (orderId, paymentResult) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ORDER_LIST_REQUEST,
+      });
+
+      // Get userInfo in userLogin state
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      // Send the token for authorization
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      // Data to be updated with is the specific order object
+      const { data } = await axios.get(`/api/orders`, config);
+
+      dispatch({
+        type: ORDER_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ORDER_LIST_FAIL,
         //   Return error response and if there's a specific error message, return it, if not, return the error message
         payload:
           error.response && error.response.data.message

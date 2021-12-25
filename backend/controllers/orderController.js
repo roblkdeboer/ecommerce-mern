@@ -94,4 +94,20 @@ const getMyOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+// @desc Get all orders
+// @route GET /api/orders
+// @access Admin
+// Use async function as mongoose returns a promise
+const getOrders = asyncHandler(async (req, res) => {
+  // Find orders for a specific user
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders);
+});
+
+export {
+  addOrderItems,
+  getOrderById,
+  updateOrderToPaid,
+  getMyOrders,
+  getOrders,
+};
