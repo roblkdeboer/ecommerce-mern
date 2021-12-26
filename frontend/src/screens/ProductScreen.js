@@ -181,7 +181,7 @@ const ProductScreen = ({ history, match }) => {
                       <Form.Group controlId="rating">
                         <Form.Label>Rating</Form.Label>
                         <Form.Control
-                          className="form-select"
+                          className="form-select mx-0"
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
