@@ -23,10 +23,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res) => {
-  res.send('API is running');
-});
-
 // For anything directed to products, send it to the product router
 app.use('/api/products', productRoutes);
 
@@ -43,8 +39,20 @@ app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
-// Make uploads folder static
 const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running');
+  });
+}
+// Make uploads folder static
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // If someone tries to access an endpoint that is not defined
