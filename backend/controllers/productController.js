@@ -7,7 +7,7 @@ import Product from '../models/productModel.js';
 // Use async function as mongoose returns a promise
 const getProducts = asyncHandler(async (req, res) => {
   // Pagination
-  const pageSize = 2;
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
 
   // Searching
