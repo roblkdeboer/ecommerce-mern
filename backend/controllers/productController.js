@@ -6,6 +6,11 @@ import Product from '../models/productModel.js';
 // @access Public
 // Use async function as mongoose returns a promise
 const getProducts = asyncHandler(async (req, res) => {
+  // Pagination
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) || 1;
+
+  // Searching
   const keyword = req.query.keyword
     ? {
         name: {
@@ -15,9 +20,13 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const products = await Product.find({ ...keyword });
+  const count = await Product.countDocuments({ ...keyword });
+  // Return products to fit on the specified page size
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
-  res.json(products);
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc Fetch single product
