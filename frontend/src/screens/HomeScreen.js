@@ -6,7 +6,9 @@ import Loader from '../components/Loader';
 import { Row, Col } from 'react-bootstrap';
 import { listProducts } from '../actions/productActions';
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const dispatch = useDispatch();
   // Takes in state and what part of the state we want to select
   const productList = useSelector((state) => state.productList);
@@ -15,9 +17,9 @@ const HomeScreen = () => {
   //   Run when the component loads
   useEffect(() => {
     // Dispatch the listProducts action
-    dispatch(listProducts());
+    dispatch(listProducts(keyword));
     // Pass in an array of dependencies to trigger useEffect when it changes
-  }, [dispatch]);
+  }, [dispatch, keyword]);
 
   return (
     <>
